@@ -58,7 +58,7 @@ contract WavePortal {
         if (waves[waveId].timestamp == 0) {
             revert WavePortal__WaveDoesntExist();
         }
-        if (waves[waveId].waver != msg.sender) {
+        if (waves[waveId].waver != msg.sender && msg.sender != owner) {
             revert WavePortal__WaveWasntSentByYou();
         }
         for (uint i = waveId; i < waves.length - 1; i++) {
