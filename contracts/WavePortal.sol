@@ -74,9 +74,9 @@ contract WavePortal {
         if (msg.sender == owner) {
             revert WavePortal__MsgToYourself();
         }
-        // if (lastWavedAt[msg.sender] + 24 hours < block.timestamp) {
-        //     revert WavePortal__IsOnCooldown();
-        // }
+        if (lastWavedAt[msg.sender] + 1 hours > block.timestamp) {
+            revert WavePortal__IsOnCooldown();
+        }
         totalWaves += 1;
         lastWavedAt[msg.sender] = block.timestamp;
 
