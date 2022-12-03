@@ -17,6 +17,21 @@ describe("Wave Portal unit tests", () => {
 	});
 
 	describe("Send wave", () => {
+		it("reverts TX if waved in the last hour, then TX succeeds after 1hr wait", async () => {
+			const tx = await wavePortalWaver1.wave(message);
+			await tx.wait(1);
+			const anotherWave = wavePortalWaver1.wave(message);
+			await expect(anotherWave).to.be.revertedWith(
+				"WavePortal__IsOnCooldown()"
+			);
+			network.provider.send("evm_increaseTime", [3600]);
+
+			const newWave = await wavePortalWaver1.wave(message);
+			await newWave.wait(1);
+			const wave = await wavePortalWaver1.getWaveById(0);
+			expect(wave.message).to.equal(message);
+		});
+
 		it("reverts TX if wave sender is contract owner", async () => {
 			const tx = wavePortalDeployer.wave(message);
 			await expect(tx).to.be.revertedWith("WavePortal__MsgToYourself()");
