@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.17;
 
@@ -8,6 +8,7 @@ error WavePortal__MsgToYourself();
 error WavePortal__IsOnCooldown();
 error WavePortal__WaveDoesntExist();
 error WavePortal__WaveAlreadyLiked();
+error WavePortal__WaveWasntSentByYou();
 
 contract WavePortal {
     uint256 private idCounter;
@@ -56,6 +57,9 @@ contract WavePortal {
     function deleteWave(uint256 waveId) public {
         if (waves[waveId].timestamp == 0) {
             revert WavePortal__WaveDoesntExist();
+        }
+        if (waves[waveId].waver != msg.sender) {
+            revert WavePortal__WaveWasntSentByYou();
         }
         for (uint i = waveId; i < waves.length - 1; i++) {
             waves[i] = waves[i + 1];
