@@ -38,20 +38,20 @@ contract WavePortal {
         console.log("Constructor initiated");
     }
 
-    function toggleLike(uint256 waveId, address sender) public {
+    function toggleLike(uint256 waveId) public {
         if (waves[waveId].timestamp == 0) {
             revert WavePortal__WaveDoesntExist();
         }
 
-        if (likes[waveId][sender]) {
-            likes[waveId][sender] = false;
+        if (likes[waveId][msg.sender]) {
+            likes[waveId][msg.sender] = false;
             waves[waveId].likesAmount -= 1;
         } else {
-            likes[waveId][sender] = true;
+            likes[waveId][msg.sender] = true;
             waves[waveId].likesAmount += 1;
         }
 
-        emit ToggleLike(sender, waveId, likes[waveId][sender]);
+        emit ToggleLike(msg.sender, waveId, likes[waveId][msg.sender]);
     }
 
     function deleteWave(uint256 waveId) public {
