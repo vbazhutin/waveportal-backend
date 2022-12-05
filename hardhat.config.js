@@ -18,15 +18,15 @@ module.exports = {
 		localhost: {
 			chainId: 31337,
 		},
-		// goerli: {
-		// 	url: GOERLI_RPC_URL,
-		// 	accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
-		//   accounts: {
-		//     mnemonic: MNEMONIC,
-		//   },
-		// 	saveDeployments: true,
-		// 	chainId: 5,
-		// },
+		goerli: {
+			url: GOERLI_RPC_URL,
+			accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+			//   accounts: {
+			//     mnemonic: MNEMONIC,
+			//   },
+			saveDeployments: true,
+			chainId: 5,
+		},
 		// mainnet: {
 		// 	url: MAINNET_RPC_URL,
 		// 	accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
@@ -45,10 +45,10 @@ module.exports = {
 	},
 	etherscan: {
 		// yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
-		// apiKey: {
-		// 	goerli: ETHERSCAN_API_KEY,
-		// 	polygon: POLYGONSCAN_API_KEY,
-		// },
+		apiKey: {
+			goerli: ETHERSCAN_API_KEY,
+			// 	polygon: POLYGONSCAN_API_KEY,
+		},
 		customChains: [
 			{
 				network: "goerli",

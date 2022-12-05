@@ -2,8 +2,6 @@
 
 pragma solidity ^0.8.17;
 
-import "hardhat/console.sol";
-
 error WavePortal__MsgToYourself();
 error WavePortal__IsOnCooldown();
 error WavePortal__WaveDoesntExist();
@@ -35,7 +33,6 @@ contract WavePortal {
 
     constructor() {
         owner = msg.sender;
-        console.log("Constructor initiated");
     }
 
     function toggleLike(uint256 waveId) public {
